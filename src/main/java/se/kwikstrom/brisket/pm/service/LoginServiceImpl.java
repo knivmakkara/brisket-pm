@@ -26,4 +26,9 @@ public class LoginServiceImpl implements LoginService {
 		}
 	}
 
+	@Override
+	public boolean isLoggedIn() {
+		return SecurityContextHolder.getContext().getAuthentication() != null;
+	}
+
 }

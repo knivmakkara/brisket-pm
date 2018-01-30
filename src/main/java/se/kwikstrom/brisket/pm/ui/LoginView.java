@@ -8,16 +8,16 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 import se.kwikstrom.brisket.pm.service.LoginException;
 import se.kwikstrom.brisket.pm.service.LoginService;
 import se.kwikstrom.brisket.pm.service.ProtectedService;
 
 @SpringView(name = LoginView.VIEW_NAME)
-public class LoginView extends FormLayout implements View {
-	public static final String VIEW_NAME = "view";
+public class LoginView extends VerticalLayout implements View {
+	public static final String VIEW_NAME = "login";
 
 	@Autowired
 	private LoginService loginService;
