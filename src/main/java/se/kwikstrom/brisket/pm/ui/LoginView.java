@@ -5,8 +5,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -28,23 +28,21 @@ public class LoginView extends VerticalLayout implements View {
 	@PostConstruct
 	void init() {
 		TextField userNameTf = new TextField("Användarnamn");
-		addComponent(userNameTf);
+		userNameTf.setWidth(null);
 		TextField passwordTf = new TextField("Lösenord");
-		addComponent(passwordTf);
-		addComponent(new Button("Logga in", (e) -> {
+		Button loginBtn = new Button("Logga in", (e) -> {
 			try {
 				loginService.login(userNameTf.getValue(), passwordTf.getValue());
+				getUI().getNavigator().navigateTo(MainView.VIEW_NAME);
 			} catch (LoginException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
-		}));
-		addComponent(new Button("Test protected", (e) -> protectedService.someProtectedMethod()));
-		addComponent(new Button("Test unprotected", (e) -> protectedService.someUnprotectedMethod()));
+		});
+
+		setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+
+		addComponent(userNameTf);
+		addComponent(passwordTf);
+		addComponent(loginBtn);
 	}
 
-	@Override
-	public void enter(ViewChangeEvent event) {
-		// This view is constructed in the init() method()
-	}
 }
