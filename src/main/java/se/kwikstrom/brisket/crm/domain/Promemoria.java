@@ -69,6 +69,10 @@ public class Promemoria {
 		    other.deliveryType, other.staff, other.rental, other.misc);
 	}
 
+	public Promemoria() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public LocalDateTime getDue() {
 		return due;
 	}

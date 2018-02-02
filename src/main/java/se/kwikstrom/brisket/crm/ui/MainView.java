@@ -10,9 +10,11 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 import se.kwikstrom.brisket.crm.service.LoginService;
 import se.kwikstrom.brisket.crm.ui.customer.CustomerMain;
+import se.kwikstrom.brisket.crm.ui.promemoria.PromemoriaMain;
 
 @SpringView(name = MainView.VIEW_NAME)
 public class MainView extends VerticalLayout implements SecureView {
@@ -28,14 +30,17 @@ public class MainView extends VerticalLayout implements SecureView {
 	@Autowired
 	private CustomerMain customerMain;
 
+	@Autowired
+	private PromemoriaMain promemoriaMain;
+
 	@PostConstruct
 	public void init() {
 		TabSheet tabSheet = new TabSheet();
+		tabSheet.addTab(promemoriaMain, "PM");
 		tabSheet.addTab(customerMain, "Kunder");
+		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
 		Button logout = new Button("Logga ut");
 		logout.setIcon(VaadinIcons.EXIT);
-		// VerticalLayout logoutlayout = new VerticalLayout(logout);
-		// logoutlayout.setComponentAlignment(logout, Alignment.TOP_RIGHT);
 		logout.addClickListener((e) -> {
 			loginService.logout();
 			getUI().getNavigator().navigateTo(MainView.VIEW_NAME);

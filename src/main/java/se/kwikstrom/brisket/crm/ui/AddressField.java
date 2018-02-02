@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.crm.ui.customer;
+package se.kwikstrom.brisket.crm.ui;
 
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;

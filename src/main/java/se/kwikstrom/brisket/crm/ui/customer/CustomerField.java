@@ -11,6 +11,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import se.kwikstrom.brisket.crm.domain.Customer;
+import se.kwikstrom.brisket.crm.ui.AddressField;
 
 public class CustomerField extends CustomField<Customer> {
 	private TextField name = new TextField("Namn");

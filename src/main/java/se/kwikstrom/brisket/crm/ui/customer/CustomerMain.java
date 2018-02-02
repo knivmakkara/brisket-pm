@@ -34,12 +34,13 @@ public class CustomerMain extends VerticalLayout {
 
 		customerGrid.setWidth("100%");
 		customerGrid.setHeight("600px");
-		customerGrid.addColumn(Customer::getName).setCaption("Kund");
+		customerGrid.addColumn(Customer::getName).setCaption("Namn");
 		customerGrid.addColumn(Customer::getPhone).setCaption("Telefon");
 		customerGrid.addColumn(Customer::getEmail).setCaption("E-post");
 		crudHeader = createCrudButtons();
 		addComponent(crudHeader);
 		addComponent(customerGrid);
+
 		updateGrid();
 	}
 
