@@ -26,6 +26,7 @@ public class CustomerWindow extends Window {
 		this.customerEditor.setValue(c);
 		this.center();
 		this.setModal(true);
+		this.setResizable(false);
 
 		Button save = new Button("Spara", (e) -> {
 			customerRepository.save(customerEditor.getValue());

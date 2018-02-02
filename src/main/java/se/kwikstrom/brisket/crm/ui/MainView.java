@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -32,6 +33,7 @@ public class MainView extends VerticalLayout implements SecureView {
 		TabSheet tabSheet = new TabSheet();
 		tabSheet.addTab(customerMain, "Kunder");
 		Button logout = new Button("Logga ut");
+		logout.setIcon(VaadinIcons.EXIT);
 		// VerticalLayout logoutlayout = new VerticalLayout(logout);
 		// logoutlayout.setComponentAlignment(logout, Alignment.TOP_RIGHT);
 		logout.addClickListener((e) -> {

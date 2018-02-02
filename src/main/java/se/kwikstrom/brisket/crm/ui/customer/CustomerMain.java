@@ -81,7 +81,7 @@ public class CustomerMain extends VerticalLayout {
 		List<Customer> result = null;
 		String filterStr = crudHeader.getFilter();
 		if (filterStr != null && filterStr.isEmpty() == false) {
-			result = customerRepository.findAllByNameLike("%" + filterStr + "%");
+			result = customerRepository.findAllByNameLikeIgnoreCase("%" + filterStr + "%");
 		} else {
 			result = customerRepository.findAll();
 		}

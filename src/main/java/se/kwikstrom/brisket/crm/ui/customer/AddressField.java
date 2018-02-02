@@ -7,7 +7,7 @@ import com.vaadin.ui.CustomField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import se.kwikstrom.brisket.crm.domain.Customer.Address;
+import se.kwikstrom.brisket.crm.domain.Address;
 
 public class AddressField extends CustomField<Address> {
 	private TextField address1 = new TextField("Adress");

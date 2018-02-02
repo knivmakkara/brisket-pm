@@ -5,8 +5,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import se.kwikstrom.brisket.crm.domain.Address;
 import se.kwikstrom.brisket.crm.domain.Customer;
-import se.kwikstrom.brisket.crm.domain.Customer.Address;
 import se.kwikstrom.brisket.crm.domain.User;
 import se.kwikstrom.brisket.crm.repository.CustomerRepository;
 import se.kwikstrom.brisket.crm.repository.UserRepository;

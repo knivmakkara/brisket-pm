@@ -22,10 +22,6 @@ public class Application {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService uds) throws Exception {
-		// auth.inMemoryAuthentication().withUser("ram").password("ram123").roles("USER");
-		// auth.inMemoryAuthentication().withUser("ravan").password("ravan123").roles("USER");
-		// auth.inMemoryAuthentication().withUser("kans").password("kans123").roles("USER");
-		// System.out.println("Security SET...");
 		auth.userDetailsService(uds);
 	}
 }
