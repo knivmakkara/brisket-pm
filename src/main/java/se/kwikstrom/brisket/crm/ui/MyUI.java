@@ -25,7 +25,8 @@ public class MyUI extends UI implements ViewDisplay {
 		setContent(root);
 
 		springViewDisplay = new Panel();
-		springViewDisplay.setSizeFull();
+		springViewDisplay.setWidth("1200");
+		springViewDisplay.setHeight("100%");
 		root.addComponent(springViewDisplay);
 		root.setExpandRatio(springViewDisplay, 1.0f);
 

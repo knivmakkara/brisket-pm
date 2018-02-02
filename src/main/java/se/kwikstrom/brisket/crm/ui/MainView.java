@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
@@ -29,7 +31,15 @@ public class MainView extends VerticalLayout implements SecureView {
 	public void init() {
 		TabSheet tabSheet = new TabSheet();
 		tabSheet.addTab(customerMain, "Kunder");
-		addComponent(tabSheet);
+		Button logout = new Button("Logga ut");
+		// VerticalLayout logoutlayout = new VerticalLayout(logout);
+		// logoutlayout.setComponentAlignment(logout, Alignment.TOP_RIGHT);
+		logout.addClickListener((e) -> {
+			loginService.logout();
+			getUI().getNavigator().navigateTo(MainView.VIEW_NAME);
+		});
+		addComponents(logout, tabSheet);
+		setComponentAlignment(logout, Alignment.TOP_RIGHT);
 	}
 
 	@Override

@@ -1,7 +1,10 @@
 package se.kwikstrom.brisket.crm.ui.customer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button.ClickEvent;
@@ -11,12 +14,13 @@ import com.vaadin.ui.VerticalLayout;
 
 import se.kwikstrom.brisket.crm.domain.Customer;
 import se.kwikstrom.brisket.crm.repository.CustomerRepository;
-import se.kwikstrom.brisket.crm.ui.CrudButtons;
+import se.kwikstrom.brisket.crm.ui.CrudHeader;
 
 @SpringComponent
 @UIScope
 public class CustomerMain extends VerticalLayout {
 
+	private CrudHeader crudHeader;
 	private Grid<Customer> customerGrid = new Grid<Customer>();
 	private CustomerRepository customerRepository;
 
@@ -28,14 +32,25 @@ public class CustomerMain extends VerticalLayout {
 
 	public void init() {
 
-		customerGrid.setWidth("1000px");
+		customerGrid.setWidth("100%");
 		customerGrid.setHeight("600px");
 		customerGrid.addColumn(Customer::getName).setCaption("Kund");
 		customerGrid.addColumn(Customer::getPhone).setCaption("Telefon");
 		customerGrid.addColumn(Customer::getEmail).setCaption("E-post");
-		addComponent(
-		    new CrudButtons((e) -> newCustomerClick(e), (e) -> editCustomerClick(e), (e) -> deleteCustomerClick(e)));
+		crudHeader = createCrudButtons();
+		addComponent(crudHeader);
 		addComponent(customerGrid);
+		updateGrid();
+	}
+
+	private CrudHeader createCrudButtons() {
+		CrudHeader crudButtons = new CrudHeader((e) -> newCustomerClick(e), (e) -> editCustomerClick(e),
+		    (e) -> deleteCustomerClick(e), (e) -> filterChange(e));
+		crudButtons.setWidth("100%");
+		return crudButtons;
+	}
+
+	private void filterChange(ValueChangeEvent<String> e) {
 		updateGrid();
 	}
 
@@ -63,6 +78,13 @@ public class CustomerMain extends VerticalLayout {
 	}
 
 	private void updateGrid() {
-		customerGrid.setItems(customerRepository.findAll());
+		List<Customer> result = null;
+		String filterStr = crudHeader.getFilter();
+		if (filterStr != null && filterStr.isEmpty() == false) {
+			result = customerRepository.findAllByNameLike("%" + filterStr + "%");
+		} else {
+			result = customerRepository.findAll();
+		}
+		customerGrid.setItems(result);
 	}
 }

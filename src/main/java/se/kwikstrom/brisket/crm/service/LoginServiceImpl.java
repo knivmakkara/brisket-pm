@@ -31,4 +31,10 @@ public class LoginServiceImpl implements LoginService {
 		return SecurityContextHolder.getContext().getAuthentication() != null;
 	}
 
+	@Override
+	public void logout() {
+		SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
+
+	}
+
 }

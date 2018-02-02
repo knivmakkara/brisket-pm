@@ -20,6 +20,7 @@ public class Customer {
 	private Integer id;
 	@NotNull
 	@Size(min = 1)
+	@Column(unique = true)
 	private String name;
 	private String email;
 	@Pattern(regexp = "[\\d-\\s]+")
