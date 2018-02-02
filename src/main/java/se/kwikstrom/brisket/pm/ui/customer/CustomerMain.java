@@ -32,7 +32,8 @@ public class CustomerMain extends VerticalLayout {
 
 	public void init() {
 
-		customerGrid.setSizeFull();
+		customerGrid.setWidth("800px");
+		customerGrid.setHeight("600px");
 		customerGrid.addColumn(Customer::getName).setCaption("Kund");
 		customerGrid.addColumn(Customer::getPhone).setCaption("Telefon");
 		customerGrid.addColumn(Customer::getEmail).setCaption("E-post");
@@ -53,13 +54,17 @@ public class CustomerMain extends VerticalLayout {
 	}
 
 	private void deleteCustomerClick(ClickEvent e) {
-
+		Customer selected = customerGrid.asSingleSelect().getValue();
+		if (selected != null) {
+			customerRepository.delete(selected);
+			updateGrid();
+		}
 	}
 
 	private void editCustomerClick(ClickEvent e) {
 		Customer selected = customerGrid.asSingleSelect().getValue();
 		if (selected != null) {
-			CustomerWindow wnd = new CustomerWindow(selected, customerRepository);
+			CustomerWindow wnd = new CustomerWindow(new Customer(selected), customerRepository);
 			wnd.setCustomerSavedListener(() -> updateGrid());
 			UI.getCurrent().addWindow(wnd);
 		}

@@ -4,10 +4,12 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -28,8 +30,10 @@ public class LoginView extends VerticalLayout implements View {
 	@PostConstruct
 	void init() {
 		TextField userNameTf = new TextField("Användarnamn");
+		userNameTf.setValue("stoffe");
 		userNameTf.setWidth(null);
-		TextField passwordTf = new TextField("Lösenord");
+		TextField passwordTf = new PasswordField("Lösenord");
+		passwordTf.setValue("pass");
 		Button loginBtn = new Button("Logga in", (e) -> {
 			try {
 				loginService.login(userNameTf.getValue(), passwordTf.getValue());
@@ -37,6 +41,8 @@ public class LoginView extends VerticalLayout implements View {
 			} catch (LoginException e1) {
 			}
 		});
+
+		loginBtn.setClickShortcut(KeyCode.ENTER);
 
 		setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
