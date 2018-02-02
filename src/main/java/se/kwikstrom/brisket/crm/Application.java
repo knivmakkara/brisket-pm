@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm;
+package se.kwikstrom.brisket.crm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import se.kwikstrom.brisket.pm.security.VaadinSecurityContextHolderStrategy;
+import se.kwikstrom.brisket.crm.security.VaadinSecurityContextHolderStrategy;
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)

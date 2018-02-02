@@ -1,15 +1,15 @@
-package se.kwikstrom.brisket.pm;
+package se.kwikstrom.brisket.crm;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import se.kwikstrom.brisket.pm.domain.Customer;
-import se.kwikstrom.brisket.pm.domain.Customer.Address;
-import se.kwikstrom.brisket.pm.domain.User;
-import se.kwikstrom.brisket.pm.repository.CustomerRepository;
-import se.kwikstrom.brisket.pm.repository.UserRepository;
+import se.kwikstrom.brisket.crm.domain.Customer;
+import se.kwikstrom.brisket.crm.domain.Customer.Address;
+import se.kwikstrom.brisket.crm.domain.User;
+import se.kwikstrom.brisket.crm.repository.CustomerRepository;
+import se.kwikstrom.brisket.crm.repository.UserRepository;
 
 @Component
 public class SampleData {

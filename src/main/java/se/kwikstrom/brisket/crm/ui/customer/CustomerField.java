@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui.customer;
+package se.kwikstrom.brisket.crm.ui.customer;
 
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;
@@ -10,7 +10,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import se.kwikstrom.brisket.pm.domain.Customer;
+import se.kwikstrom.brisket.crm.domain.Customer;
 
 public class CustomerField extends CustomField<Customer> {
 	private TextField name = new TextField("Namn");

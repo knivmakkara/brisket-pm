@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui;
+package se.kwikstrom.brisket.crm.ui;
 
 import javax.annotation.PostConstruct;
 
@@ -8,8 +8,8 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
-import se.kwikstrom.brisket.pm.service.LoginService;
-import se.kwikstrom.brisket.pm.ui.customer.CustomerMain;
+import se.kwikstrom.brisket.crm.service.LoginService;
+import se.kwikstrom.brisket.crm.ui.customer.CustomerMain;
 
 @SpringView(name = MainView.VIEW_NAME)
 public class MainView extends VerticalLayout implements SecureView {

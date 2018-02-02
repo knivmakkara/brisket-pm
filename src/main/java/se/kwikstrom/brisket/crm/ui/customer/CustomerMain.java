@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui.customer;
+package se.kwikstrom.brisket.crm.ui.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,8 +14,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import se.kwikstrom.brisket.pm.domain.Customer;
-import se.kwikstrom.brisket.pm.repository.CustomerRepository;
+import se.kwikstrom.brisket.crm.domain.Customer;
+import se.kwikstrom.brisket.crm.repository.CustomerRepository;
 
 @SpringComponent
 @UIScope

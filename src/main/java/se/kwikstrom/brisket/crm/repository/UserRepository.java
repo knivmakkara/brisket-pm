@@ -1,8 +1,8 @@
-package se.kwikstrom.brisket.pm.repository;
+package se.kwikstrom.brisket.crm.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import se.kwikstrom.brisket.pm.domain.User;
+import se.kwikstrom.brisket.crm.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByName(String username);

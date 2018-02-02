@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.service;
+package se.kwikstrom.brisket.crm.service;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;

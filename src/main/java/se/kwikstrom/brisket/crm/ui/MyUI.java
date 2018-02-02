@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui;
+package se.kwikstrom.brisket.crm.ui;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;

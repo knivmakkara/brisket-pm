@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui.customer;
+package se.kwikstrom.brisket.crm.ui.customer;
 
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;
@@ -7,7 +7,7 @@ import com.vaadin.ui.CustomField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import se.kwikstrom.brisket.pm.domain.Customer.Address;
+import se.kwikstrom.brisket.crm.domain.Customer.Address;
 
 public class AddressField extends CustomField<Address> {
 	private TextField address1 = new TextField("Adress");

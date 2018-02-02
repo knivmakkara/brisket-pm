@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.service;
+package se.kwikstrom.brisket.crm.service;
 
 public interface LoginService {
 	void login(String username, String password) throws LoginException;

@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm;
+package se.kwikstrom.brisket.crm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

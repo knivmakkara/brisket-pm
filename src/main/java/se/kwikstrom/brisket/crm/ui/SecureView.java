@@ -1,10 +1,10 @@
-package se.kwikstrom.brisket.pm.ui;
+package se.kwikstrom.brisket.crm.ui;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.UI;
 
-import se.kwikstrom.brisket.pm.service.LoginService;
+import se.kwikstrom.brisket.crm.service.LoginService;
 
 public interface SecureView extends View {
 

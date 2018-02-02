@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.security;
+package se.kwikstrom.brisket.crm.security;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import se.kwikstrom.brisket.pm.domain.User;
-import se.kwikstrom.brisket.pm.repository.UserRepository;
+import se.kwikstrom.brisket.crm.domain.User;
+import se.kwikstrom.brisket.crm.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

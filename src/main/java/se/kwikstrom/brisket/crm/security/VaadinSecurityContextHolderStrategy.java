@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.security;
+package se.kwikstrom.brisket.crm.security;
 
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;

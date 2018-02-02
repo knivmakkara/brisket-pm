@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.domain;
+package se.kwikstrom.brisket.crm.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

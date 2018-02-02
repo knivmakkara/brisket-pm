@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.service;
+package se.kwikstrom.brisket.crm.service;
 
 public class LoginException extends Exception {
 

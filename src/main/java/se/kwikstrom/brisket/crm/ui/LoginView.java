@@ -1,4 +1,4 @@
-package se.kwikstrom.brisket.pm.ui;
+package se.kwikstrom.brisket.crm.ui;
 
 import javax.annotation.PostConstruct;
 
@@ -13,9 +13,9 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import se.kwikstrom.brisket.pm.service.LoginException;
-import se.kwikstrom.brisket.pm.service.LoginService;
-import se.kwikstrom.brisket.pm.service.ProtectedService;
+import se.kwikstrom.brisket.crm.service.LoginException;
+import se.kwikstrom.brisket.crm.service.LoginService;
+import se.kwikstrom.brisket.crm.service.ProtectedService;
 
 @SpringView(name = LoginView.VIEW_NAME)
 public class LoginView extends VerticalLayout implements View {
