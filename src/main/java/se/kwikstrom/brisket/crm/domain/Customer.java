@@ -32,6 +32,10 @@ public class Customer {
 	    @AttributeOverride(name = "postal", column = @Column(name = "delivery_postal")), })
 	private Address deliveryAddress = new Address();
 	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "address1", column = @Column(name = "visitation_address1")),
+	    @AttributeOverride(name = "address2", column = @Column(name = "visitation_address2")),
+	    @AttributeOverride(name = "zipCode", column = @Column(name = "visitation_zipCode")),
+	    @AttributeOverride(name = "postal", column = @Column(name = "visitation_postal")), })
 	private Address visitationAddress = new Address();
 
 	public Customer(Integer id, String name, String email, String phone, String notes, Address deliveryAddress,
