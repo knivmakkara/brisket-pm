@@ -27,15 +27,16 @@ public class SampleData {
 
 		userRepository.save(u1);
 
-		Customer c = new Customer();
-		c.setName("test");
-		c.setDeliveryAddress(new Address("delivery address1", "delivery address 2", "upplands väsby", "19442"));
+		for (int i = 0; i < 1000; i++) {
+			Customer c = new Customer();
+			c.setName("Kund " + i);
+			c.setEmail("E-post" + i);
+			c.setPhone("2342423" + i);
+			c.setNotes("Anteckningar " + i);
+			c.setDeliveryAddress(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
+			c.setVisitationAddress(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
 
-		customerRepo.save(c);
-
-		Customer c1 = new Customer();
-		c1.setName("test2");
-
-		customerRepo.save(c1);
+			customerRepo.save(c);
+		}
 	}
 }
