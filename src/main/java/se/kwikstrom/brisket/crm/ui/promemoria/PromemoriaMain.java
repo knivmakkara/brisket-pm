@@ -1,5 +1,6 @@
 package se.kwikstrom.brisket.crm.ui.promemoria;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import se.kwikstrom.brisket.crm.domain.Promemoria;
+import se.kwikstrom.brisket.crm.repository.CustomerRepository;
 import se.kwikstrom.brisket.crm.repository.PromemoriaRepository;
 import se.kwikstrom.brisket.crm.ui.CrudHeader;
 
@@ -22,10 +24,12 @@ public class PromemoriaMain extends VerticalLayout {
 	private CrudHeader crudHeader;
 	private Grid<Promemoria> promemoriaGrid = new Grid<Promemoria>();
 	private PromemoriaRepository promemoriaRepository;
+	private CustomerRepository customerRepository;
 
 	@Autowired
-	public PromemoriaMain(PromemoriaRepository promemoriaRepository) {
+	public PromemoriaMain(PromemoriaRepository promemoriaRepository, CustomerRepository customerRepository) {
 		this.promemoriaRepository = promemoriaRepository;
+		this.customerRepository = customerRepository;
 		init();
 	}
 
@@ -35,7 +39,8 @@ public class PromemoriaMain extends VerticalLayout {
 		promemoriaGrid.addColumn(Promemoria::getCustomerName).setCaption("Kund");
 		promemoriaGrid.addColumn(Promemoria::getCustomerPhone).setCaption("Telefon");
 		promemoriaGrid.addColumn(Promemoria::getCustomerEmail).setCaption("E-post");
-		promemoriaGrid.addColumn(Promemoria::getDue).setCaption("Datum/Tid");
+		promemoriaGrid.addColumn((p) -> p.getDue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+		    .setCaption("Datum/Tid");
 		crudHeader = createCrudButtons();
 		addComponent(crudHeader);
 		addComponent(promemoriaGrid);
@@ -47,7 +52,7 @@ public class PromemoriaMain extends VerticalLayout {
 		List<Promemoria> result = null;
 		String filterStr = crudHeader.getFilter();
 		if (filterStr != null && filterStr.isEmpty() == false) {
-			result = promemoriaRepository.findAllByCustomerNameLikeIgnoreCase("%" + filterStr + "%");
+			result = promemoriaRepository.findAllByCustomerNameLike("%" + filterStr + "%");
 		} else {
 			result = promemoriaRepository.findAll();
 		}
@@ -55,21 +60,21 @@ public class PromemoriaMain extends VerticalLayout {
 	}
 
 	private CrudHeader createCrudButtons() {
-		CrudHeader crudButtons = new CrudHeader((e) -> newCustomerClick(e), (e) -> editCustomerClick(e),
-		    (e) -> deleteCustomerClick(e), (e) -> filterChange(e));
+		CrudHeader crudButtons = new CrudHeader((e) -> newPmClick(e), (e) -> editPmClick(e), (e) -> deletePmClick(e),
+		    (e) -> filterChange(e));
 		crudButtons.setWidth("100%");
 		return crudButtons;
 	}
 
-	private void editCustomerClick(ClickEvent e) {
+	private void editPmClick(ClickEvent e) {
 		Promemoria selected = promemoriaGrid.asSingleSelect().getValue();
 		if (selected != null) {
-			PromemoriaWindow wnd = new PromemoriaWindow(new Promemoria(selected), promemoriaRepository);
+			PromemoriaWindow wnd = new PromemoriaWindow(new Promemoria(selected), promemoriaRepository, customerRepository);
 			UI.getCurrent().addWindow(wnd);
 		}
 	}
 
-	private void newCustomerClick(ClickEvent e) {
+	private void newPmClick(ClickEvent e) {
 		// TODO Auto-generated method stub
 	}
 
@@ -77,7 +82,7 @@ public class PromemoriaMain extends VerticalLayout {
 		updateGrid();
 	}
 
-	private void deleteCustomerClick(ClickEvent e) {
+	private void deletePmClick(ClickEvent e) {
 		// TODO Auto-generated method stub
 	}
 

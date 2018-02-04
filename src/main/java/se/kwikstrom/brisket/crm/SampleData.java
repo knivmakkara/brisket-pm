@@ -39,9 +39,10 @@ public class SampleData {
 	}
 
 	private void createPMs() {
+		Customer cs = customerRepo.findOne(5);
 		for (int i = 0; i < 1000; i++) {
 			Promemoria c = new Promemoria();
-			c.setCustomerName("Kund " + i);
+			c.setCustomer(cs);
 			c.setCustomerEmail("E-post" + i);
 			c.setCustomerPhone("2342423" + i);
 			c.setDeliverTo(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));

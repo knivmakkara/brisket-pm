@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Promemoria {
@@ -17,7 +18,8 @@ public class Promemoria {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private LocalDateTime due;
-	private String customerName;
+	@OneToOne
+	private Customer customer;
 	private String customerPhone;
 	private String customerEmail;
 
@@ -42,13 +44,13 @@ public class Promemoria {
 	private String rental;
 	private String misc;
 
-	public Promemoria(Integer id, LocalDateTime due, String customerName, String customerPhone, String customerEmail,
+	public Promemoria(Integer id, LocalDateTime due, Customer customer, String customerPhone, String customerEmail,
 	    Address deliverTo, Address invoiceTo, String menu, String allergies, String receivedBy, String deliveryType,
 	    String staff, String rental, String misc) {
 		super();
 		this.id = id;
 		this.due = due;
-		this.customerName = customerName;
+		this.customer = customer;
 		this.customerPhone = customerPhone;
 		this.customerEmail = customerEmail;
 		this.deliverTo = deliverTo;
@@ -63,7 +65,7 @@ public class Promemoria {
 	}
 
 	public Promemoria(Promemoria other) {
-		this(other.id, other.due, other.customerName, other.customerPhone, other.customerEmail,
+		this(other.id, other.due, other.customer, other.customerPhone, other.customerEmail,
 		    other.deliverTo != null ? other.deliverTo : new Address(),
 		    other.invoiceTo != null ? other.invoiceTo : new Address(), other.menu, other.allergies, other.receivedBy,
 		    other.deliveryType, other.staff, other.rental, other.misc);
@@ -81,12 +83,12 @@ public class Promemoria {
 		this.due = due;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public String getCustomerPhone() {
@@ -175,6 +177,10 @@ public class Promemoria {
 
 	public void setMisc(String misc) {
 		this.misc = misc;
+	}
+
+	public String getCustomerName() {
+		return this.customer != null ? customer.getName() : null;
 	}
 
 }
