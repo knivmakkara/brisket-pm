@@ -36,6 +36,7 @@ public class Promemoria {
 	    @AttributeOverride(name = "postal", column = @Column(name = "invoice_postal")), })
 	private Address invoiceTo = new Address();
 
+	private int numberGuests;
 	private String menu;
 	private String allergies;
 	private String receivedBy;
@@ -121,6 +122,14 @@ public class Promemoria {
 
 	public void setInvoiceTo(Address invoiceTo) {
 		this.invoiceTo = invoiceTo;
+	}
+
+	public int getNumberGuests() {
+		return numberGuests;
+	}
+
+	public void setNumberGuests(int numberGuests) {
+		this.numberGuests = numberGuests;
 	}
 
 	public String getMenu() {

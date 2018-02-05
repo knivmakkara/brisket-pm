@@ -36,8 +36,8 @@ public class MainView extends VerticalLayout implements SecureView {
 	@PostConstruct
 	public void init() {
 		TabSheet tabSheet = new TabSheet();
-		tabSheet.addTab(promemoriaMain, "PM");
-		tabSheet.addTab(customerMain, "Kunder");
+		tabSheet.addTab(promemoriaMain, "PM", VaadinIcons.FILE_TEXT);
+		tabSheet.addTab(customerMain, "Kunder", VaadinIcons.USERS);
 		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
 		Button logout = new Button("Logga ut");
 		logout.setIcon(VaadinIcons.EXIT);

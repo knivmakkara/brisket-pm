@@ -26,11 +26,11 @@ public class Customer {
 	private String phone;
 	private String notes;
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "address1", column = @Column(name = "delivery_address1")),
-	    @AttributeOverride(name = "address2", column = @Column(name = "delivery_address2")),
-	    @AttributeOverride(name = "zipCode", column = @Column(name = "delivery_zipCode")),
-	    @AttributeOverride(name = "postal", column = @Column(name = "delivery_postal")), })
-	private Address deliveryAddress = new Address();
+	@AttributeOverrides({ @AttributeOverride(name = "address1", column = @Column(name = "invoice_address1")),
+	    @AttributeOverride(name = "address2", column = @Column(name = "invoice_address2")),
+	    @AttributeOverride(name = "zipCode", column = @Column(name = "invoice_zipCode")),
+	    @AttributeOverride(name = "postal", column = @Column(name = "invoice_postal")), })
+	private Address invoiceAddress = new Address();
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "address1", column = @Column(name = "visitation_address1")),
 	    @AttributeOverride(name = "address2", column = @Column(name = "visitation_address2")),
@@ -46,13 +46,13 @@ public class Customer {
 		this.email = email;
 		this.phone = phone;
 		this.notes = notes;
-		this.deliveryAddress = deliveryAddress;
+		this.invoiceAddress = deliveryAddress;
 		this.visitationAddress = visitationAddress;
 	}
 
 	public Customer(Customer c) {
 		this(c.id, c.name, c.email, c.phone, c.notes,
-		    c.deliveryAddress != null ? new Address(c.deliveryAddress) : new Address(),
+		    c.invoiceAddress != null ? new Address(c.invoiceAddress) : new Address(),
 		    c.visitationAddress != null ? new Address(c.visitationAddress) : new Address());
 	}
 
@@ -91,12 +91,12 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
+	public Address getInvoiceAddress() {
+		return invoiceAddress;
 	}
 
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
+	public void setInvoiceAddress(Address deliveryAddress) {
+		this.invoiceAddress = deliveryAddress;
 	}
 
 	public Address getVisitationAddress() {
@@ -110,7 +110,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", deliveryAddress="
-		    + deliveryAddress + ", visitationAddress=" + visitationAddress + "]";
+		    + invoiceAddress + ", visitationAddress=" + visitationAddress + "]";
 	}
 
 }

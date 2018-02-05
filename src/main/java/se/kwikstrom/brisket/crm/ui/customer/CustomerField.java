@@ -18,7 +18,7 @@ public class CustomerField extends CustomField<Customer> {
 	private TextField phone = new TextField("Telefon");
 	private TextField email = new TextField("E-post");
 	private TextArea notes = new TextArea("Anteckningar");
-	private AddressField deliveryAddress = new AddressField();
+	private AddressField invoiceAddress = new AddressField();
 	private AddressField visitationAddress = new AddressField();
 	private Binder<Customer> binder = new BeanValidationBinder<Customer>(Customer.class);
 
@@ -33,15 +33,23 @@ public class CustomerField extends CustomField<Customer> {
 	@Override
 	protected Component initContent() {
 		binder.bindInstanceFields(this);
-		Panel deliveryPanel = new Panel("Leverans-/Faktureringsadress", deliveryAddress);
-		Panel visitationPanel = new Panel("Besöksadress", visitationAddress);
+		Panel deliveryPanel = new Panel("Faktureringsadress", new VerticalLayout(invoiceAddress));
+		Panel visitationPanel = new Panel("Besöksadress", new VerticalLayout(visitationAddress));
 
-		VerticalLayout verticalLayout2 = new VerticalLayout(notes);
-		VerticalLayout verticalLayout = new VerticalLayout(
-		    new Panel("Allmänt", new HorizontalLayout(new VerticalLayout(name, phone, email), verticalLayout2)),
-		    new HorizontalLayout(deliveryPanel, visitationPanel));
-		verticalLayout.setMargin(false);
-		return verticalLayout;
+		VerticalLayout root = new VerticalLayout(createGeneralPanel(),
+		    new HorizontalLayout(visitationPanel, deliveryPanel));
+		root.setMargin(false);
+		return root;
+	}
+
+	private Panel createGeneralPanel() {
+		VerticalLayout col1 = new VerticalLayout(name, phone, email);
+		notes.setHeight("190px");
+		VerticalLayout col2 = new VerticalLayout(notes);
+		col1.setMargin(false);
+		col2.setMargin(false);
+		HorizontalLayout content = new HorizontalLayout(col1, col2);
+		return new Panel(new VerticalLayout(content));
 	}
 
 	@Override

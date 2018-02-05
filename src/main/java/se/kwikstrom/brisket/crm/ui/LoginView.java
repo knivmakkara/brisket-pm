@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.navigator.View;
+import com.vaadin.server.ClassResource;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -46,6 +48,7 @@ public class LoginView extends VerticalLayout implements View {
 
 		setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
+		addComponent(new Image("", new ClassResource("/static/logo.png")));
 		addComponent(userNameTf);
 		addComponent(passwordTf);
 		addComponent(loginBtn);

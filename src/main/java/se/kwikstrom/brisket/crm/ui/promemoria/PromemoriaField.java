@@ -1,7 +1,13 @@
 package se.kwikstrom.brisket.crm.ui.promemoria;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;
+import com.vaadin.data.HasValue;
+import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.data.provider.CallbackDataProvider.CountCallback;
 import com.vaadin.data.provider.CallbackDataProvider.FetchCallback;
 import com.vaadin.data.provider.DataProvider;
@@ -9,6 +15,8 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomField;
 import com.vaadin.ui.DateTimeField;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -30,6 +38,7 @@ public class PromemoriaField extends CustomField<Promemoria> {
 	private TextField staff = new TextField("Personal på plats");
 	private TextField rental = new TextField("Hyrgods");
 	private TextField misc = new TextField("Övrigt");
+	private TextField numberGuests = new TextField("Antal gäster");
 	private AddressField invoiceTo = new AddressField();
 	private AddressField deliverTo = new AddressField();
 
@@ -68,9 +77,43 @@ public class PromemoriaField extends CustomField<Promemoria> {
 		DataProvider<Customer, String> dataProvider = DataProvider.fromFilteringCallbacks(fetchCallback, countCallback);
 		customer.setDataProvider(dataProvider);
 		customer.setItemCaptionGenerator((c) -> c.getName());
+		customer.addValueChangeListener(this::customerChange);
 
+		createBinding();
+
+		VerticalLayout root = new VerticalLayout(createCustomerPanel(), createOtherPanel());
+		return root;
+	}
+
+	private void createBinding() {
+		binder.forMemberField(numberGuests).withConverter(new StringToIntegerConverter(0, "Antal gäster"));
 		binder.bindInstanceFields(this);
-		return new VerticalLayout(due, customer, customerPhone, customerEmail, menu, allergies, receivedBy);
+	}
+
+	private Component createOtherPanel() {
+		due.setWidth("180px");
+		VerticalLayout verticalLayout = new VerticalLayout(due, numberGuests, staff, rental);
+		verticalLayout.setMargin(false);
+		return new Panel(new VerticalLayout(new HorizontalLayout(verticalLayout)));
+	}
+
+	private Component createCustomerPanel() {
+		VerticalLayout col1 = new VerticalLayout(customer, customerPhone, customerEmail);
+		col1.setMargin(false);
+		return new Panel(
+		    new VerticalLayout(new HorizontalLayout(col1, new Panel("Besöksadress", new VerticalLayout(deliverTo)),
+		        new Panel("Faktureringsadress", new VerticalLayout(invoiceTo)))));
+	}
+
+	private void customerChange(ValueChangeEvent<Customer> c) {
+		if (c.getValue() != null) {
+			Map<HasValue, Function<Customer, Object>> map = new HashMap<>();
+			map.put(customerEmail, Customer::getEmail);
+			map.put(customerPhone, Customer::getPhone);
+			map.put(deliverTo, Customer::getVisitationAddress);
+			map.put(invoiceTo, Customer::getInvoiceAddress);
+			map.forEach((k, v) -> k.setValue(v.apply(c.getValue())));
+		}
 	}
 
 	@Override

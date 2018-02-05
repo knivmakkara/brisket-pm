@@ -39,6 +39,7 @@ public class PromemoriaMain extends VerticalLayout {
 		promemoriaGrid.addColumn(Promemoria::getCustomerName).setCaption("Kund");
 		promemoriaGrid.addColumn(Promemoria::getCustomerPhone).setCaption("Telefon");
 		promemoriaGrid.addColumn(Promemoria::getCustomerEmail).setCaption("E-post");
+		promemoriaGrid.addColumn(Promemoria::getNumberGuests).setCaption("Antal");
 		promemoriaGrid.addColumn((p) -> p.getDue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
 		    .setCaption("Datum/Tid");
 		crudHeader = createCrudButtons();
@@ -67,15 +68,18 @@ public class PromemoriaMain extends VerticalLayout {
 	}
 
 	private void editPmClick(ClickEvent e) {
-		Promemoria selected = promemoriaGrid.asSingleSelect().getValue();
+		showPmWindow(new Promemoria(promemoriaGrid.asSingleSelect().getValue()));
+	}
+
+	private void showPmWindow(Promemoria selected) {
 		if (selected != null) {
-			PromemoriaWindow wnd = new PromemoriaWindow(new Promemoria(selected), promemoriaRepository, customerRepository);
+			PromemoriaWindow wnd = new PromemoriaWindow(selected, promemoriaRepository, customerRepository);
 			UI.getCurrent().addWindow(wnd);
 		}
 	}
 
 	private void newPmClick(ClickEvent e) {
-		// TODO Auto-generated method stub
+		showPmWindow(new Promemoria());
 	}
 
 	private void filterChange(ValueChangeEvent<String> e) {
@@ -83,7 +87,11 @@ public class PromemoriaMain extends VerticalLayout {
 	}
 
 	private void deletePmClick(ClickEvent e) {
-		// TODO Auto-generated method stub
+		Promemoria selected = promemoriaGrid.asSingleSelect().getValue();
+		if (selected != null) {
+			promemoriaRepository.delete(selected);
+			updateGrid();
+		}
 	}
 
 }

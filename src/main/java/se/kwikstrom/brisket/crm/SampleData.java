@@ -47,7 +47,8 @@ public class SampleData {
 			c.setCustomerPhone("2342423" + i);
 			c.setDeliverTo(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
 			c.setInvoiceTo(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
-			c.setDue(LocalDateTime.now());
+			c.setDue(LocalDateTime.now().plusDays(i));
+			c.setNumberGuests(i);
 
 			promemoriaRepo.save(c);
 		}
@@ -61,7 +62,7 @@ public class SampleData {
 			c.setEmail("E-post" + i);
 			c.setPhone("2342423" + i);
 			c.setNotes("Anteckningar " + i);
-			c.setDeliveryAddress(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
+			c.setInvoiceAddress(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
 			c.setVisitationAddress(new Address("address1" + i, "address2" + i, "zip" + i, "postal" + i));
 
 			customerRepo.save(c);

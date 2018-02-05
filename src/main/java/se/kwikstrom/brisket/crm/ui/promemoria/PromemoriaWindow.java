@@ -1,6 +1,5 @@
 package se.kwikstrom.brisket.crm.ui.promemoria;
 
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 import se.kwikstrom.brisket.crm.domain.Promemoria;
@@ -27,7 +26,7 @@ public class PromemoriaWindow extends Window {
 		this.center();
 		this.setModal(true);
 		this.setResizable(false);
-		this.setContent(new VerticalLayout(promemoriaField));
+		this.setContent(promemoriaField);
 	}
 
 }
